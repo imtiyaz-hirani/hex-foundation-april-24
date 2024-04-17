@@ -7,6 +7,17 @@ public class Policy {
 	private int duration;
 	private double premium;
 
+	public Policy(int id, String name, int age, int duration, double premium) {
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.duration = duration;
+		this.premium = premium;
+	}
+
+	public Policy() { }
+
+
 	public int getId() {
 		return id;
 	}
@@ -47,4 +58,16 @@ public class Policy {
 		this.premium = premium;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Policy [id=" + id + ", name=" + name + ", age=" + age + ", duration=" + duration + ", premium="
+				+ premium + "]";
+	}
+
+
+
+	 
+
+	
 }

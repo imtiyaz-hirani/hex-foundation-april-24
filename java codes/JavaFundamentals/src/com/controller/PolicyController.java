@@ -16,7 +16,7 @@ public class PolicyController {
 		
 		System.out.println("----------All Policies-------------");
 		for(Policy p : policies) {
-			System.out.println(p.getId() + ":" + p.getName() + ":" + p.getAge() + ":"+p.getDuration());
+			System.out.println(p);
 		}
 		
 		System.out.println("--------------------------");

@@ -8,12 +8,7 @@ import com.model.Policy;
 public class PolicyService {
 
 	public Policy[] getAllPolicies() {
-		Policy p1 = new Policy(); 
-		p1.setId(1);
-		p1.setName("Jeevan Anand");
-		p1.setDuration(30);
-		p1.setPremium(30000);
-		p1.setAge(21);
+		Policy p1 = new Policy(1,"Jeevan Anand",21,30,30000); 
 		
 		Policy p2 = new Policy(); 
 		p2.setId(2);
