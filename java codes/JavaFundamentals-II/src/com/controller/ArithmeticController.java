@@ -10,12 +10,10 @@ public class ArithmeticController {
 		try {
 			int ans = arithmeticService.multipleGivenNumbers(3,0,5,7,2,8);
 			System.out.println("Ans is " +ans);
-		}
-		catch(RuntimeException re) {
-			System.out.println(re.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
-
 }
 
 /* 

@@ -1,6 +1,32 @@
 Java Fundamentals 
 =================
 
+Classes and Objects 
+   - instance variables 
+   - heap and stack 
+   - creating objects 
+   - model classes 
+   - working with multiple objects 
+   - case studies 
+
+Inheritance & polymorphism 
+  - basics of inheritance 
+  - overriding of methods 
+  - polymorphism 
+  - case studies 
+
+Keywords
+  - final: class,method,variable
+  - static: method - utility case study 
+  - abstract class and method 
+  - case studies 
+
+Interface, Contructors and Encapsulation 
+
+Exception Handling 
+  - Throwing and catching unchecked exception 
+  - Throwing and catching Checked Exception
+
 Class and Method Access Specifiers
 
 - A class has 2 access specifiers 
@@ -526,27 +552,146 @@ catch(RuntimeException re) {
     }
 
 
+Throwing a checked Exception
+----------------------------
+Rule 1: You must declare the exception to be thrown before throwing any checked exception.
+
+ex:- 
+public int multipleGivenNumbers(int... n) throws Exception {
+	   int res=1;
+		for(int e:n) {
+			if(e == 0)
+				throw new Exception("0 is not allowed"); 
+			res = res * e;
+	    }
+		return res;
+	}
 
 
+IN Controller:- 
+
+try {
+	int ans = arithmeticService.multipleGivenNumbers(3,0,5,7,2,8);
+	System.out.println("Ans is " +ans);
+	} 
+catch (Exception e) {
+	System.out.println(e.getMessage());
+}
+
+Programmer Tip:- Always throw a checked exception from service class so that controller can auto generate try-catch block. 
+If controller is not notifies about the exception thrown in service class, it will not handle that exception. 
 
 
+Case Study: 
+-----------
+Read n marks from User and compute grade acccording to following rule: 
+
+percent > 75: A
+        > 60: B
+        > 45: C
+            : D
+
+Validations: 
+if marks of any subject is greater than marks>100, then display "Marks cannot be over 100". 
+if marks of any subject is less than 0, marks<0, then display "Marks cannot be negative" 
+
+if total_marks > (100*n), then display "Invalid total marks given". 
+
+if n=4, then total_marks cannot go beyond 400. 
+
+Programmer Tip:- Always create custom exceptions in projects and throw them from service class for validation conditions.   
+
+Java Collections
+================
+
+List 
+ - ArrayList
+ - Vector
+ - LinkedList 
+
+Map
+ - HashMap
+ - Hashtable
+ - LinkedHashMap 
+
+Set
+ - TreeSet
+ - HashSet 
 
 
+ArrayList
+=========
+You can create arraylist object in 2 possible ways 
+
+1. pure object
+ArrayList alist =new ArrayList<>(); 
+2. polymorphic -- preferred 
+List plist =new ArrayList<>();
+
+We can add as many elements as we list in arraylist. there is no limit 
+
+List<Integer> list =new ArrayList<>(); //add as many as u like  
+		list.add(1);
+		list.add(4);
+		list.add(5);
+
+list.add(null); : can add null but do not sort it else u get NullPointerException
+
+/* Getting individual element from the list */
+		System.out.println(list.get(2));
+
+We can sort and search the list as well: 
+
+/* Sort this list */
+		Collections.sort(list);
+		System.out.println(list);
+
+/* Search the element in the list  */
+		System.out.println(Collections.binarySearch(list, 11)>0 ?"Present": "Not present");
+
+Working with Objects in List
+============================
+
+Car car1 = new Car(1,"MH-02 6654",LocalDate.of(2022, 02, 4), "Maruti Suzuki","Ertiga",1250000);
+Car car2 = new Car(2,"MH-04 4487",LocalDate.of(2019, 06, 14), "Tata","Altroz",1150000);
+Car car3 = new Car(3,"MH-12 2316",LocalDate.of(2020, 03, 15), "Renaut","Kiger",750000);
+		
+		List<Car> list = new ArrayList<>();
+		list.add(car1);
+		list.add(car2);
+		list.add(car3);
+
+- car objects added to the list above. 
+
+Now to sort this list, we need to use Comparator interface and provide comparison logic in compare() method 
+
+ex: 
+class A implements Comparator<Car>{
+
+	@Override
+	public int compare(Car c1, Car c2) {   //[34,67]
+		if(c1.getPrice() < c2.getPrice()) {
+			return -1;
+		}
+		if(c1.getPrice() > c2.getPrice()) { //[45,34] 
+			return 1; //swap
+		}
+		if(c1.getPrice() > c2.getPrice()) { //[23,23]
+			return 0;
+		}
+			
+		return 0;
+	}
+	//if you want me to swap: return any positive number(1)
+	//if you want me to do nothing, return any -ve number (-1)
+	//if you have same values in comparision, return 0. 
+}
+
+for CS: refer CarController.java from git 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
- 
+Connecting to the DB using JDBC API
+===================================
 
 
 
