@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.dto.ArtworkDto;
 import com.exception.ResourceNotFoundException;
 import com.model.Artist;
 import com.model.Artwork;
@@ -80,6 +81,54 @@ public class ArtworkController {
 					System.out.println(e.getMessage());
 				}
 			 break; 
+			case 2: 		
+				try {
+					//display all artists 
+					List<Artist> list = artistService.findAll();
+					for(Artist a : list) {
+						System.out.println(a);
+					}
+					//read artist id
+					System.out.println("Enter Artist ID");
+					int artistId = sc.nextInt();
+					
+					//fetch artworks of this artist
+					List<Artwork> listArtwork = artworkService.getArtworkByArtistId(artistId);
+					for(Artwork a : listArtwork) {
+						System.out.println(a);
+					}
+				} catch (ResourceNotFoundException e) {
+					System.out.println(e.getMessage());
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}				
+				break; 
+			case 3: 			
+				try {
+					List<ArtworkDto> list = artworkService.getArtworkStats();
+					System.out.println("------------------------------------------\n");
+					System.out.format("%22s%30s", "Name of Artist", "Number of Artworks");
+					System.out.println("\n-----------------------------------------");
+					for(ArtworkDto a : list) {
+						System.out.format("%22s%20d", a.getName(), a.getNumberOfArtworks());
+						System.out.print("\n");
+				}
+					System.out.println("-------------------------------------------");
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}	
+				break; 
+				/*
+				 * DTO : Data transfer Object
+				+-------------------+-------------------+
+				| name              |  numberOfArtworks |
+				+-------------------+-------------------+
+				| andres dmello     |                 2 |
+				| Leonardo da Vinci |                 1 |
+				| Pablo Picasso     |                 1 |
+				| Vincent van Gogh  |                 1 |
+				+-------------------+-------------------+
+				*/
 			}
 		}
 		sc.close();

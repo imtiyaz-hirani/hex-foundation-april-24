@@ -89,7 +89,12 @@ public class ArtistController {
 			
 		}
 		
-		sc.close();
+		//sc.close();
+	}
+	
+	public static void artistMenu() {
+		String[] sarry = {""};
+		main(sarry);
 	}
 
 }
