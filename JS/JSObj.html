@@ -11,7 +11,10 @@ onkeyup="filterEmployee()">
     
 </div>
 <br /><br />
-<button>SORT By salary ASC</button>  <button>SORT By salary DESC</button> 
+<button onclick="sortEmployeeData('ASC')">SORT By salary ASC</button>  
+<button onclick="sortEmployeeData('DESC')">SORT By salary DESC</button> 
 <br /><br />
-<input type="text" placeholder="Enter ID to delete"> 
-<button>Delete Employee</button>
+<input type="number" placeholder="Enter ID to delete" id="empId"> 
+<button onclick="deleteEmployee()">Delete Employee</button> 
+<br />
+<span style="display: none;" id="invalidMsg">Invalid Id Given</span>

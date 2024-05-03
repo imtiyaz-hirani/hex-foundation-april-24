@@ -36,29 +36,54 @@ function loadObjects(){
     empArry.push(e2);
     empArry.push(e3);
     empArry.push(e4);
-    
 }
 
 function displayAllEmployees(){
     loadObjects();
-    empArry.forEach(emp => console.log(emp.id + '--' + emp.name 
-        + '--' + emp.department + '--' + emp.city + '--' + emp.salary))
-    let data='';
-    empArry.forEach(emp=> {
-        data = data +emp.id + '--' + emp.name 
-                + '--' + emp.department + '--' + emp.city + '--' + emp.salary + '<br />'
-    })
-    document.getElementById('employeeData').innerHTML=data
+    displayEmployeeData(empArry)
 }
 
 function filterEmployee(){
     let tempArry =[...empArry];
     let searchStr = document.getElementById('searchStr').value;
-    //console.log('harry potter'.search(searchStr));
+    //filter op
     tempArry = tempArry.filter(emp=>(emp.name.search(searchStr) >= 0 || emp.city.search(searchStr) >= 0));
+    
+    displayEmployeeData(tempArry)
+}
+
+function sortEmployeeData(direction){
+    let tempArry =[...empArry];
+    //sort op
+    if(direction == 'ASC')
+        tempArry.sort((a, b) => a.salary - b.salary)
+    else
+        tempArry.sort((a, b) => b.salary - a.salary)
+
+    displayEmployeeData(tempArry)     
+}
+
+function deleteEmployee(){
+    let empId = document.getElementById('empId').value;
+    let tempArry = [...empArry] ;
+    //check if id is valid 
+     let index = tempArry.find(e => e.id == empId);
+    if(index == undefined){
+        document.getElementById('invalidMsg').style.display='block'
+    }
+    else{
+        document.getElementById('invalidMsg').style.display='none'
+    }
+        
+    tempArry = tempArry.filter(e => e.id != empId)
+    
+    displayEmployeeData(tempArry)
+}
+
+function displayEmployeeData(empArry){
     let data='';
-    tempArry.forEach(emp=> {
-    data = data +emp.id + '--' + emp.name 
+    empArry.forEach(emp=> {
+        data = data +emp.id + '--' + emp.name 
                 + '--' + emp.department + '--' + emp.city + '--' + emp.salary + '<br />'
     })
     document.getElementById('employeeData').innerHTML=data
